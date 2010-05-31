@@ -1,0 +1,7 @@
+if (strlen($code) > 2000) {
+	echo "A";
+	$run = 0;
+} else {
+	echo "B";
+	$code .= $code;
+}

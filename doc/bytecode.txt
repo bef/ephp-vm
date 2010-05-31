@@ -1,0 +1,243 @@
+This document describes the ephp bytecode.
+
+== OPs ==
+Each entry of the following list either states the opcode's value (octal) or ascii character in paratheses where convenient. Stack interaction is indicated from the interpreter's point of view.
+
+* 000 nop
+* 001 echo
+	pop
+* 002
+* 003
+* 004
+* 005
+* 006
+* 007
+* 010
+* 011
+* 012
+* 013
+* 014
+* 015
+* 016
+* 017
+* 020
+* 021
+* 022
+* 023
+* 024
+* 025
+* 026
+* 027
+* 030
+* 031
+* 032
+* 033
+* 034
+* 035
+* 036
+* 037
+* 040
+* (!) not
+	pop operand
+	push result
+* (") not equal
+	pop operand 2
+	pop operand 1
+	push result
+* (#)
+* ($)
+* (%) mod
+	pop operand 2
+	pop operand 1
+	push result
+* (&) binary and
+	pop operand 2
+	pop operand 1
+	push result
+* (')
+* (()
+* ())
+* (*) mul
+	pop operand 2
+	pop operand 1
+	push result
+* (+) add
+	pop operand 2
+	pop operand 1
+	push result
+* (,) boolean and
+	pop operand 2
+	pop operand 1
+	push result
+* (-) sub
+	pop operand 2
+	pop operand 1
+	push result
+* (.) concat
+	pop operand 2
+	pop operand 1
+	push result
+* (/) div
+	pop operand 2
+	pop operand 1
+	push result
+* (0)
+* (1)
+* (2)
+* (3)
+* (4)
+* (5)
+* (6)
+* (7)
+* (8)
+* (9)
+* (:)
+* (;) boolean or
+	pop operand 2
+	pop operand 1
+	push result
+* (<) less than
+	pop operand 2
+	pop operand 1
+	push result
+* (=) equal
+	pop operand 2
+	pop operand 1
+	push result
+* (>) greater than
+	pop operand 2
+	pop operand 1
+	push result
+* (?)
+* (@) [reserved] not identical (!===)
+* (A) logical and
+	pop operand 2
+	pop operand 1
+	push result
+* (B)
+* (C) !conditional jump
+	pop jump target
+	pop condition
+* (D) decrement
+	pop variable name
+	push result
+* (E)
+* (F) func def
+	pop argc
+	pop arg names in reverse order
+	...
+	pop function name
+* (G)
+* (H)
+* (I) increment
+	pop variable name
+	push result
+* (J)
+* (K)
+* (L)
+* (M)
+* (N)
+* (O) logical or
+	pop operand 2
+	pop operand 1
+	push result
+* (P) pop stack
+	pop
+* (Q)
+* (R)
+* (S) swap stack
+	pop a
+	pop b
+	push a
+	push b
+* (T)
+* (U)
+* (V)
+* (W)
+* (X) logical xor
+	pop operand 2
+	pop operand 1
+	push result
+* (Y)
+* (Z)
+* ([) bit shift left
+	pop operand 2
+	pop operand 1
+	push result
+* (\)
+* (]) bit shift right
+	pop operand 2
+	pop operand 1
+	push result
+* (^) binary xor
+	pop operand 2
+	pop operand 1
+	push result
+* (_) [reserved] identical (===)
+* (`)
+* (a) assign var
+	pop variable name
+	pop value
+	push value
+* (b)
+* (c) conditional jump
+	pop jump target
+	pop condition
+* (d)
+* (e)
+* (f) function call
+	pop argc
+	pop arg names in reverse order
+	...
+	pop function name
+	push return address (internal function) OR result (external function)
+* (g) get var
+	pop variable name
+	push result
+* (h)
+* (i) integer
+	push value
+* (j) jump
+	pop jump target
+* (k)
+* (l)
+* (m)
+* (n)
+* (o)
+* (p)
+* (q)
+* (r) return
+	pop absolute return address
+* (s) string
+	push value
+* (t)
+* (u)
+* (v)
+* (w)
+* (x)
+* (y)
+* (z)
+* ({) less or equal
+	pop operand 2
+	pop operand 1
+	push result
+* (|) binary or
+	pop operand 2
+	pop operand 1
+	push result
+* (}) greater or equal
+	pop operand 2
+	pop operand 1
+	push result
+* (~) binary not
+	pop operand
+	push result
+* 177
+
+== Data type encoding ==
+* Integer
+	| 1 byte op identifier ("i") | 1 sign bit (0=positive) | 7 bit length in bytes (L) | L bytes, big endian |
+	e.g. '"i" 0x02 0x01 0x03' is 0x0301
+* String
+	| op id ("s") | string length in Integer encoding (L) | L bytes |
+	there is no 0-byte terminator

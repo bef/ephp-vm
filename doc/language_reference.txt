@@ -1,0 +1,87 @@
+== Data types ==
+* string: "abc", 'abc'
+* integer: 123, 0x7b (hex), 0173 (octal)
+
+== Operators ==
+* bool/comparison:
+ == >= != <> <= < > || && !
+* logical:
+ and or xor
+* increment/decrement:
+ ++ --
+* arith.:
+ + - * / %
+* bit:
+ << >> ~ & | ~ ^
+* string/concat:
+ .
+* assignment:
+ &= .= /= -= %= *= |= += <<= >>= ^= =
+
+== Conditions ==
+* if:
+ if ($exp) $a = 1;
+ if ($exp) {} elseif {} else {}
+
+* switch:
+ switch ($exp) {
+   case $exp0:
+     bar();
+   case $exp1:
+     bla();
+     break;
+   default:
+     foo();
+ }
+
+== Loops ==
+* for:
+ for ($i = 0; $i < 5; ++$i)
+   echo "a";
+
+* goto:
+ foo:
+ echo 'a';
+ goto foo;
+
+== Functions ==
+* definition:
+ function bar() {}
+
+ function foo($a, $b) { return $a . $b; }
+
+* calling:
+ foo('a', bar());
+
+== Variable scope ==
+* local function scope:
+ $a = 1; // first $a
+ function foo() {
+   $a = 2; // second $a
+ }
+ // $a is 1 again
+
+== Comments ==
+ // comment
+ /* comment */  no comment
+ # comment
+
+== Unsupported language constructs ==
+* post-increment/decrement: $i++, $i--
+* constants
+* classes
+* exceptions
+* references
+* arrays
+* typecast
+* variable substitution in strings
+* includes
+* objects, lists and other data types
+* magic constants
+* php open/close tags: <? ?>
+* alternative syntax: endfor endif
+* namespaces
+* __halt_compiler
+* complex variable: ${ {$
+* eval/die/exit
+* magic sequence at bytecode start

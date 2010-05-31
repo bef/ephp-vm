@@ -1,0 +1,70 @@
+php tokens - %% see http://php.net/manual/en/tokens.php
+
+%% unused keywords
+% abstract|as|catch|class|clone|const|declare|empty|eval|exit|extends|final|foreach|implements|include|include_once|instanceof|interface|isset|list|new|print|private|public|protected|require|require_once|static|throw|try|unset|use|var
+% die : {token, {t_exit, TokenLine}}.
+% cfunction : {token, {t_function, TokenLine}}.
+
+%% operators
+% === : {token, {t_is_identical, TokenLine}}.
+% !== : {token, {t_is_not_identical, TokenLine}}.
+
+%% type casts
+% \(array\) : {token, {t_array_cast, TokenLine}}.
+% \((bool|boolean)\) : {token, {t_bool_cast, TokenLine}}.
+% \((real|double|float)\) : {token, {t_double_cast, TokenLine}}.
+% \((int|integer)\) : {token, {t_int_cast, TokenLine}}.
+% \(object\) : {token, {t_object_cast, TokenLine}}.
+% \(string\) : {token, {t_string_cast, TokenLine}}.
+% \(unset\) : {token, {t_unset_cast, TokenLine}}.
+
+%% magic constants
+% __CLASS__ : {token, {t_class_c, TokenLine}}.
+% __DIR__ : {token, {t_dir, TokenLine}}.
+% __FILE__ : {token, {t_file, TokenLine}}.
+% __FUNCTION__ : {token, {t_func_c, TokenLine}}.
+% __LINE__ : {token, {t_line, TokenLine}}.
+% __METHOD__ : {token, {t_method_c, TokenLine}}.
+% __NAMESPACE__ : {token, {t_ns_c, TokenLine}}.
+
+%% numbers
+% {D}+\.{D}+([eE][+-]?{D}+)? :
+% 			{token, {t_dnumber, TokenLine, list_to_float(TokenChars)}}.
+
+%% misc
+% \?>|\%> :	{token, {t_close_tag, TokenLine}}.
+% => :		{token, {t_double_arrow, TokenLine}}.
+% \:\: :		{token, {t_double_colon, TokenLine}}.
+% __halt_compiler :
+% 			{token, {t_halt_compiler, TokenLine}}.
+% -> :		{token, {t_object_operator, TokenLine}}.
+% <\?php|<\?|<\% :
+% 			{token, {t_open_tag, TokenLine}}.
+% <\?=|<\%= :	{token, {t_open_tag_with_echo, TokenLine}}.
+
+
+%% other unsupported tokens:
+% T_ARRAY	array()	array(), array syntax
+% T_BAD_CHARACTER	 	anything below ASCII 32 except \t (0x09), \n (0x0a) and \r (0x0d)
+% T_CHARACTER	 	not used anymore
+% T_CONSTANT_ENCAPSED_STRING	"foo" or 'bar'	string syntax
+% T_CURLY_OPEN	{$	complex variable parsed syntax
+% T_DOC_COMMENT	/** */	PHPDoc style comments (available since PHP 5.0.0)
+% T_DOLLAR_OPEN_CURLY_BRACES	${	complex variable parsed syntax
+% T_ENCAPSED_AND_WHITESPACE	" $a"	constant part of string with variables
+% T_ENDDECLARE	enddeclare	declare, alternative syntax
+% T_ENDFOR	endfor	for, alternative syntax
+% T_ENDFOREACH	endforeach	foreach, alternative syntax
+% T_ENDIF	endif	if, alternative syntax
+% T_ENDSWITCH	endswitch	switch, alternative syntax
+% T_ENDWHILE	endwhile	while, alternative syntax
+% T_END_HEREDOC	 	heredoc syntax
+% T_INLINE_HTML	 	text outside PHP
+% T_ML_COMMENT	/* and */	comments (PHP 4 only)
+% T_NUM_STRING	"$a[0]"	numeric array index inside string
+% T_OLD_FUNCTION	old_function	(PHP 4 Only)
+% T_PAAMAYIM_NEKUDOTAYIM	::	::. Also defined as T_DOUBLE_COLON.
+% T_START_HEREDOC	<<<	heredoc syntax
+% T_STRING	"$a[a]"	string array index inside string
+% T_STRING_VARNAME	"${a	complex variable parsed syntax
+% T_WHITESPACE	\t \r\n	 

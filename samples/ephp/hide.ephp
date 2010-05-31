@@ -1,0 +1,12 @@
+function scramble($key, $data)
+{
+	$out = "";
+	for ($i = 0; $i < strlen($data); ++$i) {
+		$keychr = substr($key, ($i % strlen($key)), 1);
+		$datachr = substr($data, $i, 1);
+		$out .= chr(ord($keychr) ^ ord($datachr));
+	}
+	return $out;
+}
+
+$data_out = scramble($key, $data);

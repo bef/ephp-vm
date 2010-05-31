@@ -1,0 +1,9 @@
+<html><body>
+	<script src="../vm/vm.js"></script>
+	<script>
+		vm = new __vm();
+		vm.v.set('in', 'abc');
+		vm.run("s\x01\x04tests\x01\x02ing.s\x01\x03outaP");
+		document.write(vm.v.get('out'));
+	</script></pre>
+</body></html>
